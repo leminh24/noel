@@ -134,18 +134,21 @@ function animate() {
 }
 animate();
 
-// --- 6. LOGIC GHI CHÚ VÀ CLICK  ---
+/// --- 6. LOGIC GHI CHÚ VÀ CHẠM (TOỐI ƯU MOBILE) ---
 
 const raycaster = new THREE.Raycaster();
+// Tăng độ nhạy khi chạm vào hạt (giúp dễ bấm trúng cây thông hơn)
+raycaster.params.Points.threshold = 1.0; 
+
 const mouse = new THREE.Vector2();
 const noteContainer = document.getElementById('note-container');
 const noteTextElement = document.getElementById('note-text');
 const closeBtn = document.getElementById('close-note');
 
-const fullText = "Giáng Sinh lạnh rồi, nếu có một món quà nhỏ làm em vui thì anh rất muốn gửi… chỉ thiếu mỗi địa chỉ thôi  =)) 🎅💌";
+const fullText = "Chúc mừng Giáng sinh và Sinh nhật vui vẻ! Mong em luôn rạng rỡ như ánh sao trên đỉnh cây thông này và gặp thật nhiều may mắn trong tuổi mới nhé! ✨🎄";
 
 let isTyping = false;
-let hasShown = false; // Biến kiểm tra xem đã hiện ghi chú chưa
+let hasShown = false;
 
 function typeWriter(text, i) {
     if (i < text.length) {
@@ -156,29 +159,31 @@ function typeWriter(text, i) {
     }
 }
 
-// Xử lý sự kiện Click trên toàn cửa sổ
-window.addEventListener('click', (event) => {
-    // Nếu ghi chú đang hiển thị thì không làm gì cả
+// Sử dụng 'pointerdown' thay vì 'click' để nhạy hơn trên điện thoại
+window.addEventListener('pointerdown', (event) => {
+    // Nếu ghi chú đang hiện thì không làm gì
     if (noteContainer.style.display === 'block') return;
 
+    // Chuyển đổi tọa độ chạm/chuột
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
+
+    // Kiểm tra va chạm với cây thông
     const intersects = raycaster.intersectObject(tree);
 
-    // Chỉ chạy nếu bấm trúng cây, không đang gõ, và chưa hiển thị lần nào
     if (intersects.length > 0 && !isTyping && !hasShown) {
         noteContainer.style.display = 'block';
         noteTextElement.innerHTML = "";
         isTyping = true;
-        hasShown = true; 
+        hasShown = true;
         typeWriter(fullText, 0);
     }
 });
 
-// Nút đóng - Thêm stopPropagation để ngăn sự kiện click lan ra cây thông
-closeBtn.addEventListener('click', (event) => {
-    event.stopPropagation(); 
+// Nút đóng
+closeBtn.addEventListener('pointerdown', (event) => {
+    event.stopPropagation();
     noteContainer.style.display = 'none';
 });
