@@ -1,32 +1,47 @@
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #000; /* Nền đen */
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+}
 
-        #greeting {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-        }
+#greeting {
+    position: absolute;
+    top: 15%; /* Đẩy lên cao hơn một chút trên mobile */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90%; /* Đảm bảo chữ nằm trong khung hình */
+    pointer-events: none; /* Tránh chạm nhầm vào chữ */
+}
 
-        h1 {
-            font-size: 3em;
-            margin: 0;
-            color: #f8e7a2; /* Màu vàng nhạt lấp lánh */
-            text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00; /* Hiệu ứng phát sáng */
-        }
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #f8e7a2;
+    text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00;
+}
 
-        p {
-            font-size: 1.2em;
-            color: #ccc;
-        }
+p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-top: 10px;
+}
 
-        canvas {
-            display: block;
-        }
+/* --- THÊM: Giao diện cho điện thoại --- */
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem; /* Chữ nhỏ lại trên điện thoại */
+    }
+    p {
+        font-size: 0.9rem;
+    }
+    #greeting {
+        top: 12%;
+    }
+}
