@@ -45,3 +45,38 @@ p {
         top: 12%;
     }
 }
+
+/* Container cho ghi chú */
+#note-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border: 1px solid #f8e7a2;
+    border-radius: 10px;
+    display: none; /* Ẩn mặc định */
+    z-index: 100;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(248, 231, 162, 0.3);
+}
+
+/* Chữ chạy */
+#note-text {
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+#close-note {
+    background: #f8e7a2;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}

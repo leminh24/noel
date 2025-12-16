@@ -133,3 +133,52 @@ function animate() {
     renderer.render(scene, camera);
 }
 animate();
+
+// --- 6. LOGIC GHI CHÚ VÀ CLICK  ---
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const noteContainer = document.getElementById('note-container');
+const noteTextElement = document.getElementById('note-text');
+const closeBtn = document.getElementById('close-note');
+
+const fullText = "Giáng Sinh lạnh rồi, nếu có một món quà nhỏ làm em vui thì anh rất muốn gửi… chỉ thiếu mỗi địa chỉ thôi  =)) 🎅💌";
+
+let isTyping = false;
+let hasShown = false; // Biến kiểm tra xem đã hiện ghi chú chưa
+
+function typeWriter(text, i) {
+    if (i < text.length) {
+        noteTextElement.innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 50);
+    } else {
+        isTyping = false;
+    }
+}
+
+// Xử lý sự kiện Click trên toàn cửa sổ
+window.addEventListener('click', (event) => {
+    // Nếu ghi chú đang hiển thị thì không làm gì cả
+    if (noteContainer.style.display === 'block') return;
+
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObject(tree);
+
+    // Chỉ chạy nếu bấm trúng cây, không đang gõ, và chưa hiển thị lần nào
+    if (intersects.length > 0 && !isTyping && !hasShown) {
+        noteContainer.style.display = 'block';
+        noteTextElement.innerHTML = "";
+        isTyping = true;
+        hasShown = true; 
+        typeWriter(fullText, 0);
+    }
+});
+
+// Nút đóng - Thêm stopPropagation để ngăn sự kiện click lan ra cây thông
+closeBtn.addEventListener('click', (event) => {
+    event.stopPropagation(); 
+    noteContainer.style.display = 'none';
+});
