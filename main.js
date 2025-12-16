@@ -145,7 +145,7 @@ const noteContainer = document.getElementById('note-container');
 const noteTextElement = document.getElementById('note-text');
 const closeBtn = document.getElementById('close-note');
 
-const fullText = "Chúc mừng Giáng sinh và Sinh nhật vui vẻ! Mong em luôn rạng rỡ như ánh sao trên đỉnh cây thông này và gặp thật nhiều may mắn trong tuổi mới nhé! ✨🎄";
+const fullText = "Giáng Sinh lạnh rồi, nếu có một món quà nhỏ làm em vui thì anh rất muốn gửi… chỉ thiếu mỗi địa chỉ thôi nè =)) 🎅💌";
 
 let isTyping = false;
 let hasShown = false;
