@@ -1,0 +1,32 @@
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000; /* Nền đen */
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        #greeting {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #f8e7a2; /* Màu vàng nhạt lấp lánh */
+            text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00; /* Hiệu ứng phát sáng */
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #ccc;
+        }
+
+        canvas {
+            display: block;
+        }
